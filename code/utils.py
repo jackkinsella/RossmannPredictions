@@ -1,5 +1,6 @@
 import numpy as np
 import csv
+import os.path
 
 
 def compare_train_test_error(X_train, X_test, y_train, y_test, model):
@@ -12,16 +13,20 @@ def compare_train_test_error(X_train, X_test, y_train, y_test, model):
 
 
 def log_test_results(settings, error, train_test_error_difference):
-    with open('test_results.csv', mode='a') as test_results:
+    csv_path = 'test_results.csv'
+    must_add_headers = False if os.path.isfile(csv_path) else True
+
+    with open(csv_path, mode='a') as test_results:
         writer = csv.writer(
             test_results, delimiter=',', quotechar='"',
             quoting=csv.QUOTE_MINIMAL
         )
 
-        writer.writerow(['Model', 'Data Description',
-                         "Model Description", "Error",
-                         "Train test error difference"
-                         ])
+        if must_add_headers:
+            writer.writerow(['Model', 'Data Description',
+                             "Model Description", "Error",
+                             "Train test error difference"
+                             ])
         writer.writerow(
             [settings["Model"], settings["Data Description"],
                 str(settings["Model Description"]),
