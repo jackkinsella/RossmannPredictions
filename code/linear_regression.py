@@ -8,6 +8,8 @@ from sklearn.dummy import DummyRegressor
 X_train, X_test, y_train, y_test = train_test_split(
     X, y, test_size=0.3, shuffle=False)
 
+assert X_train["Year"].max() <= X_test["Year"].min()
+
 dummy = DummyRegressor(strategy="mean")
 dummy.fit(X_train, y_train)
 error = root_mean_square_percentage_error(dummy.predict(X_test), y_test)

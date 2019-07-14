@@ -32,10 +32,10 @@ data["Year"] = data["Date"].dt.year
 
 # Use one-hot-encoding
 data = pd.get_dummies(data)
+data = data.sort_values(by="Date", ascending=True)
 
 # Prepare predictors and labels
 X = data.drop(["Sales", "Date"], axis=1)
-# X = data.loc[:, "Customers"]
 y = data["Sales"]
 
 
