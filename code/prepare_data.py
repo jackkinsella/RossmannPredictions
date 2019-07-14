@@ -34,7 +34,16 @@ data["Year"] = data["Date"].dt.year
 data = pd.get_dummies(data)
 data = data.sort_values(by="Date", ascending=True)
 
+settings = {
+    "Data Description": "Dropped Promo year/week, HasComp, "
+    "and all redundant one hot coding cols"}
+
 # Prepare predictors and labels
+
+data = data.drop(["Promo2SinceYear", "Promo2SinceWeek",
+                  "Assortment_c", "StoreType_d", "PromoInterval_-1",
+                  "HasCompetition"],
+                 axis=1)
 X = data.drop(["Sales", "Date"], axis=1)
 y = data["Sales"]
 
