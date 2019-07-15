@@ -105,3 +105,4 @@ venv.bak/
 
 # This project
 test_results.csv
+predictions.csv

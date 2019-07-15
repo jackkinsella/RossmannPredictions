@@ -1,7 +1,9 @@
 # Rossmann Predictions
 
-View structure of processed data:
-`$ python3 code/prepare_data.py`
+Output predictions to predictions.csv:
 
-Get score of linear regression model
-`$ python3 code/linear_regression.py`
+`$ python3 code/production.py CSV_FILE_WITH_NEW_DATA`
+
+### Requirements
+
+* pandas, sklearn, joblib
