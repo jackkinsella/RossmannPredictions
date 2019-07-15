@@ -15,6 +15,8 @@ def make_predictions(csv_path):
     y = model.predict(X)
     predictions_filepath = "predictions.csv"
     print(f"Saving predictions to {predictions_filepath}")
+    error = root_mean_square_percentage_error(y, X["Sales"])
+    print(f"Error is {error}")
     pd.Series(y).to_csv(predictions_filepath, header=False, index=False)
 
 
