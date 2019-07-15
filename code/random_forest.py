@@ -22,7 +22,8 @@ model = RandomForestRegressor(
     n_estimators=settings["Model Description"]["n_estimators"],
     max_depth=settings["Model Description"]["max_depth"],
     random_state=42, n_jobs=-1)
-model.fit(X, y)
+
+model.fit(X_train, y_train)
 
 error = root_mean_square_percentage_error(model.predict(X_test), y_test)
 print(f"Root mean squared percentage error: {error}")
