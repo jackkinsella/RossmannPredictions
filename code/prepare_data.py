@@ -2,7 +2,8 @@ import pandas as pd
 import numpy as np
 
 store = pd.read_csv("data/store.csv")
-new_train = pd.read_csv("data/new_train.csv", index_col=0,
+new_train = pd.read_csv("data/new_train.csv",
+                        index_col=0,
                         dtype={"StateHoliday": object})
 
 data = store.merge(new_train, on="Store")
@@ -11,9 +12,12 @@ data["Date"] = pd.to_datetime(data["Date"])
 
 # Feature engineering
 data["HasCompetition"] = np.where(data["CompetitionOpenSinceMonth"] >= 0, 1, 0)
-int_cols = ["CompetitionOpenSinceYear", "CompetitionOpenSinceMonth", "Promo2SinceYear",
-            "Promo2SinceWeek",
-            ]
+int_cols = [
+    "CompetitionOpenSinceYear",
+    "CompetitionOpenSinceMonth",
+    "Promo2SinceYear",
+    "Promo2SinceWeek",
+]
 
 # Deal with Nans
 data["CompetitionDistance"].fillna(-1, inplace=True)
@@ -34,9 +38,7 @@ data["Year"] = data["Date"].dt.year
 data = pd.get_dummies(data)
 data = data.sort_values(by="Date", ascending=True)
 
-settings = {
-    "Data Description": "All data"
-}
+settings = {"Data Description": "All data"}
 
 # Prepare predictors and labels
 
