@@ -71,14 +71,14 @@ def tune_params():
 
 
 def single_run():
-    print("Starting to fit model...")
     params = {
         'n_estimators': 200,
         'min_samples_split': 10,
         'min_samples_leaf': 4,
         'max_features': 'auto',
         'max_depth': 50,
-        'bootstrap': True
+        'bootstrap': True,
+        'n_jobs': 3
     }
     model = RandomForestRegressor(random_state=42, **params)
     model.fit(X_train, y_train)

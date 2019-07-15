@@ -12,7 +12,9 @@ persisted_model_filename = 'models/production.pkl'
 def make_predictions(csv_path):
     model = joblib.load(persisted_model_filename)
     X = process_data(csv_path)
-    y = model.predict(X)
+    # Hack
+    X["StateHoliday_c"] = 0
+    y = model.predict(X.drop(columns=["Sales"]))
     predictions_filepath = "predictions.csv"
     print(f"Saving predictions to {predictions_filepath}")
     error = root_mean_square_percentage_error(y, X["Sales"])

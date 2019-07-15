@@ -7,7 +7,6 @@ def generate_sample_train():
     train = pd.read_csv("data/new_train.csv",
                         index_col=0,
                         dtype={"StateHoliday": object})
-    train = train.drop(columns=["Sales"])
     train.sample(frac=0.05).to_csv("data/train_sampled.csv")
 
 
